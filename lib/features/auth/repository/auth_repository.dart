@@ -1,0 +1,29 @@
+import 'package:base_code/services/api_service.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+class AuthRepository {
+  final FlutterSecureStorage storage;
+  final ApiService apiService;
+
+  AuthRepository({required this.storage, required this.apiService});
+
+  Future<bool> register(String username, String password) async {
+    try {
+      final data = await apiService.get('path');
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  Future<bool> login(String username, String password) async {
+    return true;
+    // final savedUser = await storage.read(key: 'username');
+    // final savedPass = await storage.read(key: 'password');
+    // if (username == savedUser && password == savedPass) {
+    //   await storage.write(key: 'token', value: 'fake_token');
+    //   return true;
+    // }
+    // return false;
+  }
+}

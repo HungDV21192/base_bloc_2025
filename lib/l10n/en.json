@@ -1,0 +1,13 @@
+{
+  "register": "Register",
+  "username": "Username",
+  "username_error": "Username Error",
+  "password": "Password",
+  "password_error": "Password Error",
+  "settings": "Settings",
+  "theme": "Theme",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "language": "Language"
+}
