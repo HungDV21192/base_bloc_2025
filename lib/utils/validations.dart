@@ -8,7 +8,7 @@ String? validateUsername(String? value) {
 }
 
 String? validatePassword(String? value) {
-  if (value == null || value.length < 6) {
+  if (value == null || value.isEmpty) {
     return 'password_error'.tr();
   }
   return null;
