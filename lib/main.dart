@@ -1,3 +1,4 @@
+import 'package:base_code/config/app_config.dart';
 import 'package:base_code/config/app_themes.dart';
 import 'package:base_code/config/router.dart';
 import 'package:base_code/di/injection.dart';
@@ -33,7 +34,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.config});
+
+  final AppConfig? config;
 
   @override
   Widget build(BuildContext context) {

@@ -58,6 +58,8 @@ dependencies:
   #  firebase_performance: ^0.10.0+1
   #hash:
   crypto: ^3.0.6
+  #flavor:
+  flutter_flavorizr: ^2.3.0
 flutter_native_splash:
   background_image: assets/images/splash_screen.jpg
   android_12:
@@ -77,5 +79,26 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - lib/l10n/
     - assets/images/
+    - assets/icons/
+    - lib/l10n/
+
+flavors:
+  dev:
+    app:
+      name: "App Dev"
+    android:
+      applicationId: "com.example.base_code.dev"
+      icon: "assets/icons/dev_icon.png"
+    ios:
+      bundleId: "com.example.baseCode.dev"
+      icon: "assets/icons/dev_icon.png"
+  prod:
+    app:
+      name: "App Prod"
+    android:
+      applicationId: "com.example.base_code"
+      icon: "assets/icons/prod_icon.png"
+    ios:
+      bundleId: "com.example.baseCode"
+      icon: "assets/icons/prod_icon.png"
