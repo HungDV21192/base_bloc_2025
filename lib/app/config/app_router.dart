@@ -4,11 +4,13 @@ import 'package:base_code/features/auth/screen/register_screen.dart';
 import 'package:base_code/features/home/screen/home_screen.dart';
 import 'package:base_code/features/settings/settings_screen.dart';
 import 'package:base_code/features/splash_screen/screen/splash_screen.dart';
+import 'package:base_code/main.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final router = GoRouter(
     initialLocation: RouterName.SplashScreen,
+    navigatorKey: navigatorKey,
     routes: [
       GoRoute(
           path: RouterName.SplashScreen,

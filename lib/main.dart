@@ -1,6 +1,6 @@
+import 'package:base_code/app/config/app_config.dart';
+import 'package:base_code/app/config/app_router.dart';
 import 'package:base_code/app/config/app_themes.dart';
-import 'package:base_code/app/config/config.dart';
-import 'package:base_code/app/config/router.dart';
 import 'package:base_code/di/injection.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
 import 'package:base_code/features/home/bloc/home_bloc.dart';
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
       return MaterialApp.router(
+        key: ValueKey("${state.locale.languageCode}_${state.themeMode.name}"),
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,

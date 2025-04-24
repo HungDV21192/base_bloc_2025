@@ -35,8 +35,9 @@ class _RadioThemeState extends State<RadioThemeWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('theme'.tr(), style: TextStyles.medium),
+        Text('theme'.tr(), style: TextStyles.large),
         CustomRadioSetting<ThemeMode>(
           title: 'system'.tr(),
           value: ThemeMode.system,

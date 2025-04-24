@@ -1,23 +1,18 @@
+import 'package:base_code/main.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TextStyles {
   TextStyles._();
 
-  static TextStyle large = GoogleFonts.inter(
-    fontWeight: FontWeight.w700,
-    fontSize: 20,
-    color: Colors.white,
-  );
-  static TextStyle medium = GoogleFonts.inter(
-    fontWeight: FontWeight.w600,
-    fontSize: 16,
-    color: Colors.white,
-  );
+  static TextStyle get large {
+    return Theme.of(navigatorKey.currentContext!).textTheme.titleLarge!;
+  }
 
-  static TextStyle small = GoogleFonts.inter(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: Colors.white,
-  );
+  static TextStyle get medium {
+    return Theme.of(navigatorKey.currentContext!).textTheme.titleMedium!;
+  }
+
+  static TextStyle get small {
+    return Theme.of(navigatorKey.currentContext!).textTheme.titleSmall!;
+  }
 }

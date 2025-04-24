@@ -17,7 +17,7 @@ class CustomRadioSetting<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RadioListTile<T>(
-      title: Text(title, style: TextStyles.small),
+      title: Text(title, style: TextStyles.medium),
       value: value,
       groupValue: groupValue,
       onChanged: onChanged,

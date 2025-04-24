@@ -35,8 +35,9 @@ class _RadioLangWidgetState extends State<RadioLangWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListTile(title: Text('language'.tr(), style: TextStyles.medium)),
+        ListTile(title: Text('language'.tr(), style: TextStyles.large)),
         CustomRadioSetting<Locale>(
           title: 'vietnamese'.tr(),
           value: const Locale('vi'),

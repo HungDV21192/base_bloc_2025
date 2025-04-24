@@ -15,21 +15,24 @@ class SettingsScreen extends StatelessWidget {
       final settingsCubit = context.read<SettingsCubit>();
       return CustomScreen(
         titleAppBar: 'settings'.tr(),
-        body: ListView(
-          children: [
-            RadioThemeWidget(
-              initMode: state.themeMode,
-              onChanged: (theme) => settingsCubit.updateTheme(theme),
-            ),
-            const Divider(height: 5, color: Colors.grey),
-            RadioLangWidget(
-              initLocale: state.locale,
-              onChanged: (locale) {
-                context.setLocale(locale);
-                settingsCubit.updateLanguage(locale);
-              },
-            ),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
+            children: [
+              RadioThemeWidget(
+                initMode: state.themeMode,
+                onChanged: (theme) => settingsCubit.updateTheme(theme),
+              ),
+              const Divider(height: 5, color: Colors.grey),
+              RadioLangWidget(
+                initLocale: state.locale,
+                onChanged: (locale) {
+                  context.setLocale(locale);
+                  settingsCubit.updateLanguage(locale);
+                },
+              ),
+            ],
+          ),
         ),
       );
     });

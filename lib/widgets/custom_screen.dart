@@ -37,16 +37,15 @@ class CustomScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               titleAppBar,
-              style: TextStyles.large,
+              style: TextStyles.large.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+              ),
             ),
             leading: leading,
-            // isBack ?  (leading ?? IconButton(onPressed: ()=>context.go., icon: Icon(Icons.arrow_back_ios))),
             actions: actions,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            child: body,
-          ),
+          body: body,
           bottomSheet: bottomSheet,
           floatingActionButton: floatButton,
         ),
