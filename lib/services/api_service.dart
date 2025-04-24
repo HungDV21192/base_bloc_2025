@@ -1,5 +1,5 @@
-import 'package:base_code/app/constant.dart';
-import 'package:base_code/utils/message.dart';
+import 'package:base_code/app/utils/constant.dart';
+import 'package:base_code/app/utils/message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -23,8 +23,7 @@ class ApiService {
     return ApiService._internal(dio);
   }
 
-  Future<ApiResult<T>> get<T>(
-    String path, {
+  Future<ApiResult<T>> get<T>(String path, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
@@ -40,8 +39,7 @@ class ApiService {
     }
   }
 
-  Future<ApiResult<T>> post<T>(
-    String path, {
+  Future<ApiResult<T>> post<T>(String path, {
     dynamic data,
     Map<String, String>? headers,
   }) async {
@@ -57,8 +55,7 @@ class ApiService {
     }
   }
 
-  Future<ApiResult<T>> patch<T>(
-    String path, {
+  Future<ApiResult<T>> patch<T>(String path, {
     dynamic data,
     Map<String, String>? headers,
   }) async {
@@ -74,8 +71,7 @@ class ApiService {
     }
   }
 
-  Future<ApiResult<T>> put<T>(
-    String path, {
+  Future<ApiResult<T>> put<T>(String path, {
     dynamic data,
     Map<String, String>? headers,
   }) async {
@@ -91,8 +87,7 @@ class ApiService {
     }
   }
 
-  Future<ApiResult<T>> delete<T>(
-    String path, {
+  Future<ApiResult<T>> delete<T>(String path, {
     dynamic data,
     Map<String, String>? headers,
   }) async {

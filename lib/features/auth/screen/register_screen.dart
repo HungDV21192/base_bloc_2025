@@ -1,9 +1,9 @@
-import 'package:base_code/app/router_name.dart';
+import 'package:base_code/app/config/router_name.dart';
+import 'package:base_code/app/utils/message.dart';
+import 'package:base_code/app/utils/validations.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
 import 'package:base_code/features/auth/bloc/auth_event.dart';
 import 'package:base_code/features/auth/bloc/auth_state.dart';
-import 'package:base_code/utils/message.dart';
-import 'package:base_code/utils/validations.dart';
 import 'package:base_code/widgets/custom_button.dart';
 import 'package:base_code/widgets/custom_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';

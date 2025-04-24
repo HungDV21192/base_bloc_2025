@@ -1,4 +1,4 @@
-import 'package:base_code/app/constant.dart';
+import 'package:base_code/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -61,10 +61,10 @@ dependencies:
   #flavor:
   flutter_flavorizr: ^2.3.0
 flutter_native_splash:
-  background_image: assets/images/splash_screen.jpg
+  background_image: assets/images/splash_screen.png # android ko đc xem ios đc ko
   android_12:
-  # color: "#006C81"
-  # image: assets/images/LogoSplash.png
+    color: "#006C81"
+    image: assets/images/splash_screen.png
   #    color: "#FFFFFF"
   #    image: assets/images/bsh_splash.png
   android: true

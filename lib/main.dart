@@ -1,6 +1,6 @@
-import 'package:base_code/config/app_config.dart';
-import 'package:base_code/config/app_themes.dart';
-import 'package:base_code/config/router.dart';
+import 'package:base_code/app/config/app_config.dart';
+import 'package:base_code/app/config/app_themes.dart';
+import 'package:base_code/app/config/router.dart';
 import 'package:base_code/di/injection.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
 import 'package:base_code/features/home/bloc/home_bloc.dart';
@@ -10,11 +10,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  Future.delayed(const Duration(milliseconds: 1), () async {
+    FlutterNativeSplash.remove();
+  });
   await EasyLocalization.ensureInitialized();
   runApp(
     MultiBlocProvider(

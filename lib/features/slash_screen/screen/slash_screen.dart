@@ -1,4 +1,5 @@
-import 'package:base_code/app/router_name.dart';
+import 'package:base_code/app/utils/constant.dart';
+import 'package:base_code/app/config/router_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,6 +29,7 @@ class _SlashScreenState extends State<SlashScreen> {
         width: double.infinity,
         height: double.infinity,
         color: Colors.red,
+        child: Image.asset(ImageAssets.hinhen, fit: BoxFit.fill),
       ),
     );
   }
