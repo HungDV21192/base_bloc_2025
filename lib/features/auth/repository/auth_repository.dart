@@ -9,7 +9,7 @@ class AuthRepository {
 
   Future<bool> register(String username, String password) async {
     try {
-      final data = await apiService.get('path');
+      await apiService.get('path');
       return true;
     } catch (err) {
       return false;

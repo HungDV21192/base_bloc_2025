@@ -4,4 +4,5 @@
 - Sử dụng flutter_bloc để quản lý state
 - Sử dụng dio để call api
 -
-    * Check class ExpandedWidget hiệu ứng thu gọn khi cuộn
+
+* Check class ExpandedWidget hiệu ứng thu gọn khi cuộn

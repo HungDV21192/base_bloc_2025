@@ -46,7 +46,6 @@ dependencies:
   #  image: ^4.1.3
   #font
   google_fonts: ^6.1.0
-
   #
   package_info_plus: ^8.0.0
   #firebase
@@ -70,6 +69,14 @@ flutter_native_splash:
   android: true
   fullscreen: true
   ios: true
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_const_constructors: true
+    always_use_package_imports: true
+    avoid_print: true
+    prefer_single_quotes: true
 
 dev_dependencies:
   flutter_test:

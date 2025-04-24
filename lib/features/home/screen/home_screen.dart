@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:base_code/app/config/router_name.dart';
 import 'package:base_code/features/home/bloc/home_bloc.dart';
 import 'package:base_code/features/home/bloc/home_event.dart';
 import 'package:base_code/features/home/bloc/home_state.dart';
+import 'package:base_code/widgets/custom_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     final storedUsername = await storage.read(key: 'username');
     setState(() => username = storedUsername);
   }
@@ -41,8 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Chào, $username")),
+    return CustomScreen(
+      titleAppBar: '${'hello'.tr()} JaykinD',
+      actions: [
+        IconButton(
+          onPressed: () => context.push(RouterName.Settings),
+          icon: const Icon(Icons.settings),
+        ),
+      ],
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeImageUploaded) {
@@ -57,37 +67,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 CircleAvatar(
                   radius: 50,
                   backgroundImage:
-                  imageUrl != null ? NetworkImage(imageUrl!) : null,
-                  child: imageUrl == null ? Icon(Icons.person, size: 50) : null,
+                      imageUrl != null ? NetworkImage(imageUrl!) : null,
+                  child: imageUrl == null
+                      ? const Icon(Icons.person, size: 50)
+                      : null,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text("Username: $username"),
               ],
             ),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_a_photo),
+      floatButton: FloatingActionButton(
+        child: const Icon(Icons.add_a_photo),
         onPressed: () async {
           final source = await showDialog<ImageSource>(
             context: context,
-            builder: (context) =>
-                SimpleDialog(
-                  title: Text("Chọn ảnh"),
-                  children: [
-                    SimpleDialogOption(
-                      onPressed: () =>
-                          Navigator.pop(context, ImageSource.camera),
-                      child: Text("Chụp ảnh"),
-                    ),
-                    SimpleDialogOption(
-                      onPressed: () =>
-                          Navigator.pop(context, ImageSource.gallery),
-                      child: Text("Chọn từ thư viện"),
-                    ),
-                  ],
+            builder: (context) => SimpleDialog(
+              title: const Text("Chọn ảnh"),
+              children: [
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context, ImageSource.camera),
+                  child: const Text("Chụp ảnh"),
                 ),
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context, ImageSource.gallery),
+                  child: const Text("Chọn từ thư viện"),
+                ),
+              ],
+            ),
           );
           if (source != null) await _pickImage(source);
         },

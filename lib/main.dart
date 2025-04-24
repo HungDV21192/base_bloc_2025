@@ -1,5 +1,5 @@
-import 'package:base_code/app/config/app_config.dart';
 import 'package:base_code/app/config/app_themes.dart';
+import 'package:base_code/app/config/config.dart';
 import 'package:base_code/app/config/router.dart';
 import 'package:base_code/di/injection.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
@@ -17,7 +17,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  Future.delayed(const Duration(milliseconds: 1), () async {
+  Future.delayed(const Duration(milliseconds: 500), () async {
     FlutterNativeSplash.remove();
   });
   await EasyLocalization.ensureInitialized();
@@ -45,15 +45,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, settings) {
+    return BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
       return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,
-        themeMode: settings.themeMode,
+        themeMode: state.themeMode,
         routerConfig: AppRouter.router,
-        locale: context.locale,
+        locale: state.locale,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
       );

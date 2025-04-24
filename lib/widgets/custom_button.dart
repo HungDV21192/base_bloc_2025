@@ -1,3 +1,4 @@
+import 'package:base_code/app/config/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -35,12 +36,7 @@ class CustomButton extends StatelessWidget {
                 )
               : Text(
                   label,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    height: 1,
-                  ),
+                  style: TextStyles.medium,
                   textAlign: TextAlign.center,
                 ),
         ));

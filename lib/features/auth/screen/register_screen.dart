@@ -1,10 +1,11 @@
 import 'package:base_code/app/config/router_name.dart';
-import 'package:base_code/app/utils/message.dart';
-import 'package:base_code/app/utils/validations.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
 import 'package:base_code/features/auth/bloc/auth_event.dart';
 import 'package:base_code/features/auth/bloc/auth_state.dart';
+import 'package:base_code/utils/message.dart';
+import 'package:base_code/utils/validations.dart';
 import 'package:base_code/widgets/custom_button.dart';
+import 'package:base_code/widgets/custom_screen.dart';
 import 'package:base_code/widgets/custom_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -58,81 +59,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (didPop) return;
-
-        // Tùy chọn: hiển thị cảnh báo hoặc xác nhận
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Xác nhận'),
-            content: Text('Bạn có chắc muốn thoát không?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(), // Đóng dialog
-                child: Text('Không'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context)
-                    ..pop() // đóng dialog
-                    ..pop(); // thoát màn hình
-                },
-                child: Text('Có'),
-              ),
-            ],
-          ),
-        );
-      },
-      child: GestureDetector(
-        onTap: () => hideKeyboard(context),
-        child: Scaffold(
-          appBar: AppBar(title: Text('register'.tr())),
-          body: BlocConsumer<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthLoading) {
-                FlushBarServices.showSuccess('Loading');
-              } else if (state is AuthSuccess) {
-                context.go(RouterName.LoginView);
-              }
-            },
-            builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.all(16),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        controller: _usernameCtr,
-                        focusNode: _usernameFocus,
-                        targetFocusNode: _passwordFocus,
-                        label: 'username'.tr(),
-                        onChanged: (value) => onValidButton(),
-                        validator: (value) => validateUsername(value),
-                      ),
-                      CustomTextField(
-                        controller: _passwordCtr,
-                        focusNode: _passwordFocus,
-                        label: 'password'.tr(),
-                        onChanged: (value) => onValidButton(),
-                        onFieldSubmitted: (_) => _passwordFocus.unfocus,
-                        validator: (value) => validatePassword(value),
-                      ),
-                      const SizedBox(height: 20),
-                      CustomButton(
-                        onTap: validButton ? _register : null,
-                        label: 'register'.tr(),
-                      )
-                    ],
+    return CustomScreen(
+      titleAppBar: 'register'.tr(),
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthLoading) {
+            FlushBarServices.showSuccess('loading'.tr());
+          } else if (state is AuthSuccess) {
+            context.go(RouterName.LoginView);
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: _usernameCtr,
+                    focusNode: _usernameFocus,
+                    targetFocusNode: _passwordFocus,
+                    label: 'username'.tr(),
+                    onChanged: (value) => onValidButton(),
+                    validator: (value) => validateUsername(value),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
+                  CustomTextField(
+                    controller: _passwordCtr,
+                    focusNode: _passwordFocus,
+                    label: 'password'.tr(),
+                    onChanged: (value) => onValidButton(),
+                    onFieldSubmitted: (_) => _passwordFocus.unfocus,
+                    validator: (value) => validatePassword(value),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    // onTap: validButton ? _register : null,
+                    onTap: () => context.go(RouterName.LoginView),
+                    label: 'register'.tr(),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

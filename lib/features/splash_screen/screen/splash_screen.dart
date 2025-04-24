@@ -1,16 +1,16 @@
-import 'package:base_code/app/utils/constant.dart';
 import 'package:base_code/app/config/router_name.dart';
+import 'package:base_code/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SlashScreen extends StatefulWidget {
-  const SlashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SlashScreen> createState() => _SlashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SlashScreenState extends State<SlashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 2500), () async {
