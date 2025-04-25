@@ -11,7 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RegisterEvent>((event, emit) async {
       await _handleAuth(
         emit,
-        () => repo.register(event.username, event.password),
+        () => repo.register(username: event.username, password: event.password),
         failureMessage: 'register_failed'.tr(),
       );
     });
@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) async {
       await _handleAuth(
         emit,
-        () => repo.login(event.username, event.password),
+        () => repo.login(username: event.username, password: event.password),
         failureMessage: 'login_failed'.tr(),
       );
     });

@@ -7,7 +7,8 @@ class AuthRepository {
 
   AuthRepository({required this.storage, required this.apiService});
 
-  Future<bool> register(String username, String password) async {
+  Future<bool> register(
+      {required String username, required String password}) async {
     try {
       await apiService.get('path');
       return true;
@@ -16,7 +17,14 @@ class AuthRepository {
     }
   }
 
-  Future<bool> login(String username, String password) async {
+  Future<bool> login(
+      {required String username, required String password}) async {
+    // if (password.length >= 8) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+
     return true;
     // final savedUser = await storage.read(key: 'username');
     // final savedPass = await storage.read(key: 'password');

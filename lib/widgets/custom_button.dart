@@ -1,3 +1,4 @@
+import 'package:base_code/app/config/app_color.dart';
 import 'package:base_code/app/config/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,10 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(
-                onTap != null ? Colors.red : Colors.grey)),
+          minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 45)),
+          backgroundColor: WidgetStatePropertyAll(
+              onTap != null ? AppColor.colorMain : AppColor.colorWelcome),
+        ),
         onPressed: onTap,
         child: AnimatedSize(
           duration: const Duration(milliseconds: 200),
@@ -36,7 +39,10 @@ class CustomButton extends StatelessWidget {
                 )
               : Text(
                   label,
-                  style: TextStyles.medium,
+                  style: TextStyles.medium.copyWith(
+                    color: onTap != null ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
                   textAlign: TextAlign.center,
                 ),
         ));

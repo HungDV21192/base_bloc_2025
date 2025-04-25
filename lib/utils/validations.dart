@@ -1,15 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 
-String? validateUsername(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'username_error'.tr();
+class Validations {
+  static String? isValidAccount(String? account) {
+    if ((account ?? '').isNotEmpty) {
+      return null;
+    } else {
+      return 'username_error'.tr();
+    }
   }
-  return null;
-}
 
-String? validatePassword(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'password_error'.tr();
+  static String? isValidPassword(String? password) {
+    if ((password ?? '').isNotEmpty && password!.length >= 6) {
+      return null;
+    } else {
+      return 'password_error'.tr();
+    }
   }
-  return null;
 }

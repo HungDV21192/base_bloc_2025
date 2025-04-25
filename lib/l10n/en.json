@@ -20,5 +20,12 @@
   "loading": "Loading",
   "hello": "Hello",
   "english": "English",
-  "vietnamese": "Vietnamese"
+  "vietnamese": "Vietnamese",
+  "splash_welcome": "Welcome! Tap continue to begin your journey.",
+  "welcome": "Welcome",
+  "continue": "Continue",
+  "no_account": "Don’t have an Account ?",
+  "have_account": "Already have an Account! ?",
+  "remember_me": "Remember Me",
+  "forgot_password": "Forgot Password?"
 }

@@ -12,6 +12,10 @@ class TextStyles {
     return Theme.of(navigatorKey.currentContext!).textTheme.titleMedium!;
   }
 
+  static TextStyle get mediumButton {
+    return Theme.of(navigatorKey.currentContext!).textTheme.titleMedium!;
+  }
+
   static TextStyle get small {
     return Theme.of(navigatorKey.currentContext!).textTheme.titleSmall!;
   }

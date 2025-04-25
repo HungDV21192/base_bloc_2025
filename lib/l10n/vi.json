@@ -21,5 +21,12 @@
   "loading": "Loading",
   "hello": "Xin chào",
   "english": "Tiếng anh",
-  "vietnamese": "Tiếng việt"
+  "vietnamese": "Tiếng việt",
+  "splash_welcome": "Chào mừng bạn! Nhấn tiếp tục để bắt đầu trải nghiệm.",
+  "welcome": "Xin chào",
+  "continue": "Tiếp tục",
+  "no_account": "Không có tài khoản ?",
+  "have_account": "Bạn đã có tài khoản!",
+  "remember_me": "Nhớ tôi",
+  "forgot_password": "Quên mật khẩu?"
 }

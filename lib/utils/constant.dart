@@ -22,9 +22,11 @@ class LocalPrefsKey {
 }
 
 class ImageAssets {
-  static const String hinhen = '${Base.imagePath}/hinhen.jpg';
+  static const String splash_screen = '${Base.imagePath}/splash_screen.png';
+  static const String image_background =
+      '${Base.imagePath}/image_background.png';
 }
 
 class SvgAssets {
-  static const String demoIcon = '${Base.svgPath}/demoIcon.jpg';
+  static const String ic_splash_next = '${Base.svgPath}/ic_splash_next.svg';
 }

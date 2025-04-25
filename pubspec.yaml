@@ -17,18 +17,20 @@ dependencies:
   #storage
   flutter_secure_storage: ^9.2.2
   shared_preferences: ^2.2.3
+  #  hive: ^2.2.3
+  #  hive_flutter: ^1.1.0
+  #notify
+  another_flushbar: ^1.12.30
   #splash
   flutter_native_splash: ^2.4.0
   #language
   easy_localization: ^3.0.7+1
-  #  hive: ^2.2.3
-  #  hive_flutter: ^1.1.0
   #router
   go_router: ^15.0.0
   #init
   intl: ^0.19.0
-  get_it: ^8.0.3
-  flutter_lints: ^3.0.0
+  #  get_it: ^8.0.3
+  #  flutter_lints: ^3.0.0
   #camera
   #  camera: ^0.11.0+1
   #  camera_android: ^0.10.9+6
@@ -37,16 +39,16 @@ dependencies:
   #image
   cached_network_image: ^3.4.1
   connectivity_plus: ^6.0.3
-  another_flushbar: ^1.12.30
-  #Loading
-  flutter_easyloading: ^3.0.5
+  flutter_svg: ^2.1.0
+  image_picker: ^1.0.4
   #  photo_view: ^0.15.0
   #  flutter_image_compress: ^2.0.4
-  image_picker: ^1.0.4
   #  image: ^4.1.3
+  #Loading
+  flutter_easyloading: ^3.0.5
   #font
   google_fonts: ^6.1.0
-  #
+  # Info app
   package_info_plus: ^8.0.0
   #firebase
   #  firebase_crashlytics: ^4.0.1
@@ -59,11 +61,18 @@ dependencies:
   crypto: ^3.0.6
   #flavor:
   flutter_flavorizr: ^2.3.0
+  #logo app:
+  flutter_launcher_icons: ^0.14.3
+  #test:
+  mockito: ^5.4.3
+  bloc_test: ^10.0.0
+  build_runner:
+  test:
 flutter_native_splash:
   background_image: assets/images/splash_screen.png # android ko đc xem ios đc ko
   android_12:
-    color: "#006C81"
-    image: assets/images/splash_screen.png
+  #    color: "#FFFFFF"
+  #    image: assets/images/splash_screen.png
   #    color: "#FFFFFF"
   #    image: assets/images/bsh_splash.png
   android: true
@@ -81,13 +90,16 @@ linter:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   flutter_lints: ^3.0.0
 flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/images/
     - assets/icons/
+    - assets/images/
+    - assets/svg/
     - lib/l10n/
 
 flavors:
