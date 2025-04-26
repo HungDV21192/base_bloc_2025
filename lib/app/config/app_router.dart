@@ -25,6 +25,15 @@ class AppRouter {
       GoRoute(
           path: RouterName.Settings,
           builder: (_, __) => const SettingsScreen()),
+      //Todo: Ví dụ cho việc data số qua constructor của màn hình
+      // Tại màn hình chuyển gọi context.go('/detail', extra: product); hoặc context.push('/detail', extra: product);
+      // GoRoute(
+      //   path: '/detail',
+      //   builder: (context, state) {
+      //     final product = state.extra as Product;
+      //     return DetailPage(product: product);
+      //   },
+      // ),
     ],
   );
 }
