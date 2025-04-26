@@ -28,5 +28,6 @@
   "no_account": "Không có tài khoản ?",
   "have_account": "Bạn đã có tài khoản!",
   "remember_me": "Nhớ tôi",
-  "forgot_password": "Quên mật khẩu?"
+  "forgot_password": "Quên mật khẩu?",
+  "confirm_password": "Xác nhận mật khẩu"
 }

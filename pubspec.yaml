@@ -46,6 +46,7 @@ dependencies:
   #  image: ^4.1.3
   #Loading
   flutter_easyloading: ^3.0.5
+  loading_animation_widget: ^1.3.0
   #font
   google_fonts: ^6.1.0
   # Info app

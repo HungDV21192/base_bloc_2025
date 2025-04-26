@@ -27,5 +27,6 @@
   "no_account": "Don’t have an Account ?",
   "have_account": "Already have an Account! ?",
   "remember_me": "Remember Me",
-  "forgot_password": "Forgot Password?"
+  "forgot_password": "Forgot Password?",
+  "confirm_password": "Confirm Password"
 }

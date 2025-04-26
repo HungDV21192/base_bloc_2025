@@ -19,7 +19,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) async {
       await _handleAuth(
         emit,
-        () => repo.login(username: event.username, password: event.password),
+        () {
+          return repo.login(username: event.username, password: event.password);
+        },
         failureMessage: 'login_failed'.tr(),
       );
     });
@@ -33,6 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       final success = await authAction();
+      await Future.delayed(const Duration(seconds: 2));
       if (success) {
         emit(AuthSuccess());
       } else {

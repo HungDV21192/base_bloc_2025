@@ -10,7 +10,15 @@ class Validations {
   }
 
   static String? isValidPassword(String? password) {
-    if ((password ?? '').isNotEmpty && password!.length >= 6) {
+    if ((password ?? '').isNotEmpty) {
+      return null;
+    } else {
+      return 'password_error'.tr();
+    }
+  }
+
+  static String? isValidConfirmPW(String? password, String? confirmPW) {
+    if ((confirmPW ?? '').isNotEmpty && (confirmPW == password)) {
       return null;
     } else {
       return 'password_error'.tr();

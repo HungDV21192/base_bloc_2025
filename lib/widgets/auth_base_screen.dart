@@ -30,7 +30,8 @@ class _AuthBaseScreenState extends State<AuthBaseScreen>
       parent: _controller,
       curve: Curves.easeOut,
     ));
-    Future.delayed(const Duration(milliseconds: 1000), () async {
+    Future.delayed(Duration(milliseconds: widget.indexScreen == 0 ? 1000 : 500),
+        () async {
       setState(() {
         showDetail = true;
       });
@@ -46,33 +47,43 @@ class _AuthBaseScreenState extends State<AuthBaseScreen>
     super.dispose();
   }
 
+  void hideKeyboard(BuildContext context) {
+    final currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      currentFocus.focusedChild!.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: widget.indexScreen == 2
-                ? 400
-                : (widget.indexScreen == 1 ? 300 : 200),
-            child: Image.asset(
-              ImageAssets.image_background,
-              fit: BoxFit.fill,
-            ),
-          ),
-          if (showDetail)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SlideTransition(
-                position: _slideAnimation,
-                child: widget.body,
+      body: GestureDetector(
+        onTap: () => hideKeyboard(context),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: widget.indexScreen == 2
+                  ? 500
+                  : (widget.indexScreen == 1 ? 450 : 250),
+              child: Image.asset(
+                ImageAssets.image_background,
+                fit: BoxFit.fill,
               ),
-            )
-        ],
+            ),
+            if (showDetail)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: widget.body,
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

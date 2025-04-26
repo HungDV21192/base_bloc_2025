@@ -9,12 +9,12 @@ class AuthRepository {
 
   Future<bool> register(
       {required String username, required String password}) async {
-    try {
-      await apiService.get('path');
-      return true;
-    } catch (err) {
-      return false;
-    }
+    // try {
+    // await apiService.get('path');
+    return true;
+    // } catch (err) {
+    //   return false;
+    // }
   }
 
   Future<bool> login(

@@ -10,6 +10,7 @@ class RegisterEvent extends AuthEvent {
 class LoginEvent extends AuthEvent {
   final String username;
   final String password;
+  final bool isSaveAccount;
 
-  LoginEvent(this.username, this.password);
+  LoginEvent(this.username, this.password, this.isSaveAccount);
 }

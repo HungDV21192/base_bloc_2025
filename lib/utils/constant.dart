@@ -11,8 +11,8 @@ class Endpoint {
 
 class LocalStorageKey {
   static const String ACCESS_TOKEN = 'LOGIN_MODEL';
-  static const String AUTHEN_USERNAME = 'LOGIN_MODEL_BSHC';
-  static const String AUTHEN_PASSWORD = 'LOGIN_MODEL_BHHK';
+  static const String USERNAME = 'USERNAME';
+  static const String PASSWORD = 'PASSWORD';
 }
 
 class LocalPrefsKey {
