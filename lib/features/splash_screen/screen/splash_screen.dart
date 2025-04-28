@@ -1,5 +1,4 @@
 import 'package:base_code/app/config/app_color.dart';
-import 'package:base_code/app/config/router_name.dart';
 import 'package:base_code/app/config/text_styles.dart';
 import 'package:base_code/utils/constant.dart';
 import 'package:base_code/widgets/auth_base_screen.dart';
@@ -34,7 +33,8 @@ class SplashScreen extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: InkWell(
-              onTap: () => context.go(RouterName.RegisterView),
+              onTap: () => context.go('/home'),
+              // context.go(RouterName.RegisterView),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[

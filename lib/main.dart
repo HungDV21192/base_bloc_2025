@@ -34,7 +34,7 @@ void main() async {
         supportedLocales: const [Locale('en'), Locale('vi')],
         path: 'lib/l10n',
         fallbackLocale: const Locale('vi'),
-        child: const MyApp(),
+        child: MyApp(),
       ),
     ),
   );
