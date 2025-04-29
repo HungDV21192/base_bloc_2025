@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:base_code/app/config/router_name.dart';
@@ -6,6 +7,7 @@ import 'package:base_code/features/home/bloc/home_event.dart';
 import 'package:base_code/features/home/bloc/home_state.dart';
 import 'package:base_code/services/stringee_service.dart';
 import 'package:base_code/widgets/custom_screen.dart';
+import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +16,46 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stringee_plugin/stringee_plugin.dart';
+import 'package:uuid/uuid.dart';
+
+String createTokenJWT(String userId) {
+  final apiKeySid =
+      'SK.0.GnPvTjatKsbbmpkLi9l8ExkJ9hnY2wVr'; // API Key SID của bạn
+  final apiKeySecret =
+      'UGUwUG03T0wwSU1RazUzeGxEWGNjNHBTR3YwNHFMSno='; // API Secret Key (dùng nguyên string)
+
+  final header = {
+    'alg': 'HS256',
+    'typ': 'JWT',
+    'cty': 'stringee-api;v=1',
+  };
+
+  final payload = {
+    'jti': const Uuid().v4(),
+    // Tạo jti random mỗi lần (bạn cần thêm package uuid nhé)
+    'iss': apiKeySid,
+    'exp': (DateTime.now().millisecondsSinceEpoch ~/ 1000) + 8 * 3600,
+    // Expire sau 8 tiếng
+    'userId': userId,
+  };
+
+  String base64UrlEncodeNoPadding(List<int> bytes) {
+    return base64Url.encode(bytes).replaceAll('=', '');
+  }
+
+  final headerEncoded =
+      base64UrlEncodeNoPadding(utf8.encode(json.encode(header)));
+  final payloadEncoded =
+      base64UrlEncodeNoPadding(utf8.encode(json.encode(payload)));
+
+  final toSign = '$headerEncoded.$payloadEncoded';
+  final hmac = Hmac(sha256, utf8.encode(apiKeySecret));
+  final signature = hmac.convert(utf8.encode(toSign));
+  final signatureEncoded = base64UrlEncodeNoPadding(signature.bytes);
+
+  final jwt = '$toSign.$signatureEncoded';
+  return jwt;
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,8 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
   String? username;
   String? imageUrl;
   final StringeeService _stringeeService = StringeeService();
-  String token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InN0cmluZ2VlLWFwaTt2PTEifQ.eyJqdGkiOiJjOGY0ZjBhNy05ZTZiLTRkZjEtOGI5NC0xMmJmOWEyMTU3ZDciLCJpc3MiOiJTSy4wLklsOGxmSUF6MmZzN1EyUjFYMGFzRWY2NlQ3UlJaTiIsImV4cCI6MTc0NTg0MDU0OCwidXNlcklkIjoiYWJjMTIzIn0.PA0_cBH2XMXg0LvTkjn0BA4aX2WhobIzfKBl4Lxrz8I';
+
+  // String token =
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InN0cmluZ2VlLWFwaTt2PTEifQ.eyJqdGkiOiJjOGY0ZjBhNy05ZTZiLTRkZjEtOGI5NC0xMmJmOWEyMTU3ZDciLCJpc3MiOiJTSy4wLklsOGxmSUF6MmZzN1EyUjFYMGFzRWY2NlQ3UlJaTiIsImV4cCI6MTc0NTg0MDU0OCwidXNlcklkIjoiYWJjMTIzIn0.PA0_cBH2XMXg0LvTkjn0BA4aX2WhobIzfKBl4Lxrz8I';
 
   //
   // final header = {'alg': 'HS256', 'typ': 'JWT', "cty": "stringee-api;v=1"};
@@ -43,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _loadUserData();
-    _stringeeService.connect(token);
+    _stringeeService.connect(createTokenJWT('jaykind'));
   }
 
   Future<bool> requestPermissions() async {
@@ -66,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _stringeeService.callTapped(
         isVideoCall: true,
         callType: StringeeObjectEventType.call,
-        toUser: 'abcdef123',
+        toUser: 'bruno2ouf',
       );
     }
   }
@@ -91,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
       titleAppBar: '${'hello'.tr()} JaykinD',
       actions: [
         IconButton(
-          onPressed: () => context.push(RouterName.Settings),
+          onPressed: () => context.push(RouterName.Demo),
           icon: const Icon(Icons.settings),
         ),
       ],

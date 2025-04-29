@@ -40,7 +40,7 @@ class GetBtnAudio extends StatelessWidget {
         break;
     }
     return CircleButton(
-      colorBG: Colors.white,
+      colorBG: primary,
       onTap: toggleSpeaker,
       iconUrl: icon,
       colorIcon: color,

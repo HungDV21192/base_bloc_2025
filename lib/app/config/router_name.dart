@@ -4,4 +4,5 @@ class RouterName {
   static const String LoginView = '/login';
   static const String HomeView = '/home';
   static const String Settings = '/settings';
+  static const String Demo = '/demo_test';
 }

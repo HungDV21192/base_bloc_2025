@@ -77,6 +77,7 @@ class StringeeService with ChangeNotifier {
           toUserId: call.to!,
           callType: StringeeObjectEventType.call,
           showIncomingUi: true,
+          stringeeCall: call,
         ),
       ),
     );
@@ -93,6 +94,7 @@ class StringeeService with ChangeNotifier {
           showIncomingUi: true,
           isVideoCall: call.isVideoCall,
           callType: StringeeObjectEventType.call2,
+          stringeeCall2: call,
         ),
       ),
     );

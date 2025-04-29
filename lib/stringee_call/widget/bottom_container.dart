@@ -15,6 +15,7 @@ class BottomContainer extends StatelessWidget {
     this.isMute = true,
     this.isVideoEnable = true,
     this.toggleSpeaker,
+    required this.audioDevice,
   });
 
   final bool showIncomingUi;
@@ -26,6 +27,7 @@ class BottomContainer extends StatelessWidget {
   final bool isMute;
   final bool isVideoEnable;
   final VoidCallback? toggleSpeaker;
+  final AudioDevice audioDevice;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +45,14 @@ class BottomContainer extends StatelessWidget {
                       CircleButton(
                         onTap: rejectCallTapped,
                         iconUrl: Icons.call_end,
-                        colorIcon: Colors.black,
-                        colorBG: Colors.white,
+                        colorIcon: Colors.white,
+                        colorBG: Colors.red,
                       ),
                       CircleButton(
-                        colorBG: Colors.white,
+                        colorBG: Colors.green,
                         onTap: acceptCallTapped,
                         iconUrl: Icons.call,
-                        colorIcon: Colors.black,
+                        colorIcon: Colors.white,
                       ),
                     ],
                   )
@@ -60,7 +62,8 @@ class BottomContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GetBtnAudio(
-                        audioDevice: AudioDevice(audioType: AudioType.earpiece),
+                        audioDevice:
+                            AudioDevice(audioType: audioDevice.audioType),
                         toggleSpeaker: toggleSpeaker,
                       ),
                       CircleButton(
@@ -70,11 +73,11 @@ class BottomContainer extends StatelessWidget {
                         colorIcon: isMute ? Colors.black : Colors.white,
                       ),
                       CircleButton(
-                        colorBG: isVideoEnable ? Colors.white54 : Colors.white,
+                        colorBG: isVideoEnable ? Colors.white : Colors.white54,
                         onTap: toggleVideo,
                         iconUrl:
-                            isVideoEnable ? Icons.videocam_off : Icons.videocam,
-                        colorIcon: isVideoEnable ? Colors.white : Colors.black,
+                            isVideoEnable ? Icons.videocam : Icons.videocam_off,
+                        colorIcon: isVideoEnable ? Colors.black : Colors.white,
                       ),
                       CircleButton(
                         colorBG: Colors.red,

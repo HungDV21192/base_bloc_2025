@@ -1,4 +1,5 @@
 import 'package:base_code/app/config/router_name.dart';
+import 'package:base_code/demo_test.dart';
 import 'package:base_code/features/auth/screen/login_screen.dart';
 import 'package:base_code/features/auth/screen/register_screen.dart';
 import 'package:base_code/features/home/screen/home_screen.dart';
@@ -25,6 +26,8 @@ class AppRouter {
       GoRoute(
           path: RouterName.Settings,
           builder: (_, __) => const SettingsScreen()),
+      GoRoute(path: RouterName.Demo,
+          builder: (_, __) => const CounterScreenWrapper()),
     ],
   );
 }
