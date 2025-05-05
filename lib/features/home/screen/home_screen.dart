@@ -20,9 +20,9 @@ import 'package:uuid/uuid.dart';
 
 String createTokenJWT(String userId) {
   final apiKeySid =
-      'SK.0.GnPvTjatKsbbmpkLi9l8ExkJ9hnY2wVr'; // API Key SID của bạn
+      'SK.0.G3K3pzAQvMuqA4DThpWmz4h2NqatygCj'; // API Key SID của bạn
   final apiKeySecret =
-      'UGUwUG03T0wwSU1RazUzeGxEWGNjNHBTR3YwNHFMSno='; // API Secret Key (dùng nguyên string)
+      'dHppOXBTSnpCVmY2NFBnQlFkbDVOZnA2ZDE2RW9RQg=='; // API Secret Key
 
   final header = {
     'alg': 'HS256',
@@ -47,12 +47,10 @@ String createTokenJWT(String userId) {
       base64UrlEncodeNoPadding(utf8.encode(json.encode(header)));
   final payloadEncoded =
       base64UrlEncodeNoPadding(utf8.encode(json.encode(payload)));
-
   final toSign = '$headerEncoded.$payloadEncoded';
   final hmac = Hmac(sha256, utf8.encode(apiKeySecret));
   final signature = hmac.convert(utf8.encode(toSign));
   final signatureEncoded = base64UrlEncodeNoPadding(signature.bytes);
-
   final jwt = '$toSign.$signatureEncoded';
   return jwt;
 }
@@ -86,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _loadUserData();
-    _stringeeService.connect(createTokenJWT('jaykind'));
+    _stringeeService.connect(createTokenJWT('bruno2ouf'));
   }
 
   Future<bool> requestPermissions() async {
@@ -109,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _stringeeService.callTapped(
         isVideoCall: true,
         callType: StringeeObjectEventType.call,
-        toUser: 'bruno2ouf',
+        toUser: 'jaykind',
       );
     }
   }

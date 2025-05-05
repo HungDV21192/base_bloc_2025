@@ -13,8 +13,8 @@ class CallScreen extends StatelessWidget {
   final String fromUserId;
   final StringeeObjectEventType callType;
   final bool isVideoCall;
-  final StringeeCall2? stringeeCall2;
-  final StringeeCall? stringeeCall;
+  final StringeeCall2? call2;
+  final StringeeCall? call;
 
   const CallScreen({
     super.key,
@@ -24,8 +24,8 @@ class CallScreen extends StatelessWidget {
     required this.fromUserId,
     required this.callType,
     this.isVideoCall = false,
-    this.stringeeCall2,
-    this.stringeeCall,
+    this.call2,
+    this.call,
   });
 
   @override
@@ -38,6 +38,8 @@ class CallScreen extends StatelessWidget {
               fromUserId: fromUserId,
               callType: callType,
               isVideoCall: isVideoCall,
+              call2: call2,
+              call: call,
             ),
         builder: (context, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {

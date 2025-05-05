@@ -12,6 +12,8 @@ class CallViewModel with ChangeNotifier {
   final String fromUserId;
   final StringeeObjectEventType callType;
   final bool isVideoCall;
+  final StringeeCall? call;
+  final StringeeCall2? call2;
 
   CallViewModel({
     required this.client,
@@ -20,6 +22,8 @@ class CallViewModel with ChangeNotifier {
     required this.fromUserId,
     required this.callType,
     required this.isVideoCall,
+    this.call,
+    this.call2,
   });
 
   late StringeeAudioManager _audioManager;
@@ -42,14 +46,14 @@ class CallViewModel with ChangeNotifier {
 
   AudioDevice get audioDevice => _audioDevice;
   List<AudioDevice> _availableAudioDevices = [];
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
   StringeeAudioEvent? _event;
 
   void onInit() {
     _showIncomingUi = showIncomingUi;
     _audioManager = StringeeAudioManager();
     _isVideoEnable = isVideoCall;
+    stringeeCall = call;
+    stringeeCall2 = call2;
     _event = StringeeAudioEvent(
       onChangeAudioDevice: (selectedAudioDevice, availableAudioDevices) {
         _availableAudioDevices = availableAudioDevices;
@@ -107,7 +111,6 @@ class CallViewModel with ChangeNotifier {
     _audioManager.selectDevice(device).then((value) {
       if (value.status) {
         _audioDevice = device;
-        print('check infoo bool 12 ${_audioDevice.name}');
         notifyListeners();
       }
     });
@@ -121,7 +124,6 @@ class CallViewModel with ChangeNotifier {
     if (stringeeCall != null) {
       stringeeCall!.eventStreamController.stream.listen((event) {
         Map<dynamic, dynamic> map = event;
-        print('check data map \n${map.toString()}');
         switch (map['eventType']) {
           case StringeeCallEvents.didChangeSignalingState:
             handleSignalingStateChangeEvent(map['body']);
@@ -142,7 +144,6 @@ class CallViewModel with ChangeNotifier {
             handleReceiveRemoteStreamEvent(map['body']);
             break;
           default:
-            print('dsa');
             break;
         }
       });
@@ -266,6 +267,7 @@ class CallViewModel with ChangeNotifier {
     if (callType == StringeeObjectEventType.call && stringeeCall != null) {
       stringeeCall!.hangup().then((result) {
         bool status = result['status'];
+        print('check xem status la gi $status');
         if (status) {
           if (Platform.isAndroid) {
             clearDataEndDismiss();
@@ -286,8 +288,9 @@ class CallViewModel with ChangeNotifier {
   }
 
   void acceptCallTapped() {
+    _showIncomingUi = !_showIncomingUi;
+    notifyListeners();
     if (callType == StringeeObjectEventType.call) {
-      print('check string call $stringeeCall');
       if (stringeeCall != null) {
         stringeeCall!.answer().then((result) {
           bool status = result['status'];
@@ -306,8 +309,6 @@ class CallViewModel with ChangeNotifier {
         });
       }
     }
-    _showIncomingUi = !_showIncomingUi;
-    notifyListeners();
   }
 
   void rejectCallTapped() {
@@ -349,54 +350,34 @@ class CallViewModel with ChangeNotifier {
     if (localScreen != null) {
       localScreen = null;
       notifyListeners();
-      Future.delayed(const Duration(milliseconds: 200), () {
-        localScreen = new StringeeVideoView(
-          callId,
-          true,
-          alignment: Alignment.topRight,
-          margin: const EdgeInsets.only(top: 25.0, right: 25.0),
-          height: 150.0,
-          width: 100.0,
-          scalingType: ScalingType.fit,
-        );
-        notifyListeners();
-      });
-    } else {
-      localScreen = new StringeeVideoView(
-        callId,
-        true,
-        alignment: Alignment.topRight,
-        margin: const EdgeInsets.only(top: 25.0, right: 25.0),
-        height: 150.0,
-        width: 100.0,
-        scalingType: ScalingType.fit,
-      );
-      notifyListeners();
+      Future.delayed(const Duration(milliseconds: 200), () {});
     }
+    localScreen = new StringeeVideoView(
+      callId,
+      true,
+      alignment: Alignment.topRight,
+      margin: const EdgeInsets.only(top: 25.0, right: 25.0),
+      height: 150.0,
+      width: 100.0,
+      scalingType: ScalingType.fit,
+    );
+    notifyListeners();
   }
 
   void handleReceiveRemoteStreamEvent(String callId) {
     if (remoteScreen != null) {
       remoteScreen = null;
       notifyListeners();
-      Future.delayed(const Duration(milliseconds: 200), () {
-        remoteScreen = new StringeeVideoView(
-          callId,
-          false,
-          isMirror: false,
-          scalingType: ScalingType.fit,
-        );
-      });
-      notifyListeners();
-    } else {
-      remoteScreen = new StringeeVideoView(
+    }
+    Future.delayed(const Duration(milliseconds: 200), () {
+      remoteScreen = StringeeVideoView(
         callId,
         false,
         isMirror: false,
         scalingType: ScalingType.fit,
       );
       notifyListeners();
-    }
+    });
   }
 
   void handleAddVideoTrackEvent(StringeeVideoTrack track) {
@@ -411,8 +392,8 @@ class CallViewModel with ChangeNotifier {
           width: 100.0,
           scalingType: ScalingType.fit,
         );
-        notifyListeners();
       });
+      notifyListeners();
     } else {
       remoteScreen = null;
       notifyListeners();
@@ -421,8 +402,8 @@ class CallViewModel with ChangeNotifier {
           isMirror: false,
           scalingType: ScalingType.fit,
         );
-        notifyListeners();
       });
+      notifyListeners();
     }
   }
 

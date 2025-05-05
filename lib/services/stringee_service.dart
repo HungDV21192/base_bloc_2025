@@ -77,7 +77,8 @@ class StringeeService with ChangeNotifier {
           toUserId: call.to!,
           callType: StringeeObjectEventType.call,
           showIncomingUi: true,
-          stringeeCall: call,
+          isVideoCall: call.isVideoCall,
+          call: call,
         ),
       ),
     );
@@ -94,7 +95,7 @@ class StringeeService with ChangeNotifier {
           showIncomingUi: true,
           isVideoCall: call.isVideoCall,
           callType: StringeeObjectEventType.call2,
-          stringeeCall2: call,
+          call2: call,
         ),
       ),
     );
@@ -105,7 +106,6 @@ class StringeeService with ChangeNotifier {
     required StringeeObjectEventType callType,
     required String toUser,
   }) {
-    print('check xem coi la gi ${toUser.isEmpty}/${!_client.hasConnected}');
     if (toUser.isEmpty || !_client.hasConnected) return;
     Navigator.push(
       navigatorKey.currentContext!,
