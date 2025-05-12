@@ -1,5 +1,4 @@
 import 'package:base_code/app/config/router_name.dart';
-import 'package:base_code/demo_test.dart';
 import 'package:base_code/features/auth/screen/login_screen.dart';
 import 'package:base_code/features/auth/screen/register_screen.dart';
 import 'package:base_code/features/home/screen/home_screen.dart';
@@ -10,24 +9,22 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: RouterName.SplashScreen,
+    initialLocation: RouterName.splashScreen,
     navigatorKey: navigatorKey,
     routes: [
       GoRoute(
-          path: RouterName.SplashScreen,
+          path: RouterName.splashScreen,
           builder: (_, __) => const SplashScreen()),
       GoRoute(
-          path: RouterName.RegisterView,
+          path: RouterName.registerView,
           builder: (_, __) => const RegisterScreen()),
       GoRoute(
-          path: RouterName.LoginView, builder: (_, __) => const LoginScreen()),
+          path: RouterName.loginView, builder: (_, __) => const LoginScreen()),
       GoRoute(
-          path: RouterName.HomeView, builder: (_, __) => const HomeScreen()),
+          path: RouterName.homeView, builder: (_, __) => const HomeScreen()),
       GoRoute(
-          path: RouterName.Settings,
+          path: RouterName.settings,
           builder: (_, __) => const SettingsScreen()),
-      GoRoute(path: RouterName.Demo,
-          builder: (_, __) => const CounterScreenWrapper()),
     ],
   );
 }

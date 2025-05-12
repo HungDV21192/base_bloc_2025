@@ -68,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             showLoading();
           } else if (state is AuthSuccess) {
             hideLoading();
-            context.go(RouterName.LoginView);
+            context.go(RouterName.loginView);
           }
         },
         builder: (context, state) {
@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         child: CustomRichText(
                           title: '${'have_account'.tr()} ',
                           subTitle: 'sign_in'.tr(),
-                          onTap: () => context.go(RouterName.LoginView),
+                          onTap: () => context.go(RouterName.loginView),
                         ),
                       ),
                     ],

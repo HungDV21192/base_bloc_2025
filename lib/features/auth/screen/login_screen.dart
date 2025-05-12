@@ -1,17 +1,22 @@
+import 'dart:async';
+
 import 'package:base_code/app/config/app_color.dart';
+import 'package:base_code/app/config/constant.dart';
 import 'package:base_code/app/config/router_name.dart';
 import 'package:base_code/app/config/text_styles.dart';
+import 'package:base_code/app/env/env_controller.dart';
 import 'package:base_code/features/auth/bloc/auth_bloc.dart';
 import 'package:base_code/features/auth/bloc/auth_event.dart';
 import 'package:base_code/features/auth/bloc/auth_state.dart';
 import 'package:base_code/features/auth/bloc/remember_me_cubit.dart';
 import 'package:base_code/features/auth/screen/widgets/custom_richtext.dart';
-import 'package:base_code/utils/constant.dart';
+import 'package:base_code/utils/message.dart';
 import 'package:base_code/utils/util.dart';
 import 'package:base_code/utils/validations.dart';
 import 'package:base_code/widgets/auth_base_screen.dart';
 import 'package:base_code/widgets/custom_button.dart';
 import 'package:base_code/widgets/custom_text_field.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,14 +35,15 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordCtr = TextEditingController();
   final _usernameFocus = FocusNode();
   final _passwordFocus = FocusNode();
-  var validButton = false;
+  var validButton = ValueNotifier<bool>(false);
   final _formKey = GlobalKey<FormState>();
   var isSaveAccount = false;
+  final envController = EnvController();
 
   Future<void> _loadUserData() async {
     const storage = FlutterSecureStorage();
-    final userName = await storage.read(key: LocalStorageKey.USERNAME);
-    final password = await storage.read(key: LocalStorageKey.PASSWORD);
+    final userName = await storage.read(key: StorageKey.USERNAME);
+    final password = await storage.read(key: StorageKey.PASSWORD);
     isSaveAccount = (userName ?? '').isNotEmpty && (password ?? '').isNotEmpty;
   }
 
@@ -51,9 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onValidButton() {
-    setState(() {
-      validButton = _formKey.currentState?.validate() ?? false;
-    });
+    validButton.value = _formKey.currentState?.validate() ?? false;
   }
 
   void _login() {
@@ -66,14 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    StreamSubscription<List<ConnectivityResult>> subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
+      if (result.contains(ConnectivityResult.none)) {
+        FlushBarServices.showWarning('no_internet'.tr());
+      }
+    });
     _loadUserData();
-    // StreamSubscription<List<ConnectivityResult>> subscription = Connectivity()
-    //     .onConnectivityChanged
-    //     .listen((List<ConnectivityResult> result) {
-    //   if (result.contains(ConnectivityResult.none)) {
-    //     FlushBarServices.showWarning('Không có kết nối mạng');
-    //   }
-    // });
     super.initState();
   }
 
@@ -89,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               showLoading();
             } else if (state is AuthSuccess) {
               hideLoading();
-              context.go('/home');
+              context.go(RouterName.homeView);
             }
           },
           builder: (context, state) {
@@ -180,16 +184,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   right: 16,
                   child: Column(
                     children: [
-                      CustomButton(
-                        onTap: validButton ? () => _login() : null,
-                        label: 'sign_in'.tr(),
-                      ),
+                      ValueListenableBuilder<bool>(
+                          valueListenable: validButton,
+                          builder: (context, isValid, _) {
+                            return CustomButton(
+                              onTap: validButton.value ? () => _login() : null,
+                              label: 'sign_in'.tr(),
+                            );
+                          }),
                       const SizedBox(height: 20),
                       Center(
                         child: CustomRichText(
                           title: '${'no_account'.tr()} ',
                           subTitle: 'register'.tr(),
-                          onTap: () => context.go(RouterName.RegisterView),
+                          onTap: () => context.go(RouterName.registerView),
                         ),
                       ),
                     ],
@@ -198,6 +206,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             );
           },
+        ),
+      ),
+      floatACBT: InkWell(
+        onLongPress: () => envController.toggleEnvironment(),
+        child: Image.asset(
+          ImageAssets.lg_cpn,
+          width: 50,
+          height: 50,
         ),
       ),
     );

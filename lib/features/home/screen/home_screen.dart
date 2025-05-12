@@ -1,27 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:base_code/app/config/router_name.dart';
 import 'package:base_code/features/home/bloc/home_bloc.dart';
 import 'package:base_code/features/home/bloc/home_event.dart';
 import 'package:base_code/features/home/bloc/home_state.dart';
-import 'package:base_code/services/stringee_service.dart';
+import 'package:base_code/features/stringee_call/stringee_service.dart';
 import 'package:base_code/widgets/custom_screen.dart';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stringee_plugin/stringee_plugin.dart';
 import 'package:uuid/uuid.dart';
 
 String createTokenJWT(String userId) {
-  final apiKeySid =
+  const apiKeySid =
       'SK.0.G3K3pzAQvMuqA4DThpWmz4h2NqatygCj'; // API Key SID của bạn
-  final apiKeySecret =
+  const apiKeySecret =
       'dHppOXBTSnpCVmY2NFBnQlFkbDVOZnA2ZDE2RW9RQg=='; // API Secret Key
 
   final header = {
@@ -132,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
       titleAppBar: '${'hello'.tr()} JaykinD',
       actions: [
         IconButton(
-          onPressed: () => context.push(RouterName.Demo),
+          onPressed: () {},
           icon: const Icon(Icons.settings),
         ),
       ],

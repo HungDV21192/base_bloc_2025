@@ -1,5 +1,4 @@
 import 'package:base_code/app/config/app_color.dart';
-import 'package:base_code/app/config/app_config.dart';
 import 'package:base_code/app/config/app_router.dart';
 import 'package:base_code/app/config/app_themes.dart';
 import 'package:base_code/di/injection.dart';
@@ -34,16 +33,14 @@ void main() async {
         supportedLocales: const [Locale('en'), Locale('vi')],
         path: 'lib/l10n',
         fallbackLocale: const Locale('vi'),
-        child: MyApp(),
+        child: const MyApp(),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, this.config});
-
-  final AppConfig? config;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +77,7 @@ void _configLoading() {
     ..indicatorSize = 45.0
     ..radius = 10.0
     ..displayDuration = const Duration(seconds: 2)
-    ..backgroundColor = AppColor.colorMain
+    ..backgroundColor = Colors.transparent
     ..progressColor = Colors.transparent
     ..indicatorColor = Colors.transparent
     ..boxShadow = <BoxShadow>[]
@@ -88,7 +85,7 @@ void _configLoading() {
     ..textColor = Colors.red
     ..maskColor = Colors.red
     ..indicatorWidget = LoadingAnimationWidget.threeArchedCircle(
-      color: Colors.white,
+      color: AppColor.colorMain,
       size: 50,
     );
 }

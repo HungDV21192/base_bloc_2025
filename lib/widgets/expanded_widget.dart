@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//Todo: Tạo hiệu ứng thu gọn Leen hoặc xuống
+//Todo: Tạo hiệu ứng thu gọn lên hoặc xuống khi dùng Scroll lên xuống hoă sang ngang
 class ExpandedWidget extends StatefulWidget {
   final Widget child;
   final bool expand;

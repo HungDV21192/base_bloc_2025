@@ -1,11 +1,17 @@
-import 'package:base_code/utils/constant.dart';
+import 'package:base_code/app/config/constant.dart';
 import 'package:flutter/material.dart';
 
 class AuthBaseScreen extends StatefulWidget {
-  const AuthBaseScreen({super.key, required this.body, this.indexScreen = 0});
+  const AuthBaseScreen({
+    super.key,
+    required this.body,
+    this.indexScreen = 0,
+    this.floatACBT,
+  });
 
   final Widget body;
   final int indexScreen;
+  final Widget? floatACBT;
 
   @override
   State<AuthBaseScreen> createState() => _AuthBaseScreenState();
@@ -24,7 +30,7 @@ class _AuthBaseScreenState extends State<AuthBaseScreen>
       duration: const Duration(milliseconds: 800),
     );
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 1), // Bắt đầu từ dưới
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _controller,
@@ -85,6 +91,7 @@ class _AuthBaseScreenState extends State<AuthBaseScreen>
           ],
         ),
       ),
+      floatingActionButton: widget.floatACBT,
     );
   }
 }
