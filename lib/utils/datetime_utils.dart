@@ -31,7 +31,6 @@ class DateTimeUtils {
         return DateTime.now();
       }
     } catch (e) {
-      // FlushBarServices.showError('Không thể chuyển đổi ngày tháng $e');
       return DateTime.now();
     }
   }

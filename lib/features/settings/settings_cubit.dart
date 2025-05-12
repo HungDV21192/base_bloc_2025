@@ -1,4 +1,4 @@
-import 'package:base_code/utils/constant.dart';
+import 'package:base_code/app/config/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,8 +26,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<void> loadFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
-    final theme = prefs.getString(LocalPrefsKey.THEME_MODE) ?? 'system';
-    final lang = prefs.getString(LocalPrefsKey.LANGUAGE) ?? 'en';
+    final theme = prefs.getString(PrefsKey.THEME_MODE) ?? 'system';
+    final lang = prefs.getString(PrefsKey.LANGUAGE) ?? 'en';
 
     emit(SettingsState(
       themeMode: _stringToThemeMode(theme),
@@ -37,13 +37,13 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<void> updateTheme(ThemeMode mode) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(LocalPrefsKey.THEME_MODE, _themeModeToString(mode));
+    await prefs.setString(PrefsKey.THEME_MODE, _themeModeToString(mode));
     emit(state.copyWith(themeMode: mode));
   }
 
   Future<void> updateLanguage(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(LocalPrefsKey.LANGUAGE, locale.languageCode);
+    await prefs.setString(PrefsKey.LANGUAGE, locale.languageCode);
     emit(state.copyWith(locale: locale));
   }
 

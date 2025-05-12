@@ -1,4 +1,4 @@
-import 'package:base_code/utils/constant.dart';
+import 'package:base_code/app/config/constant.dart';
 import 'package:base_code/utils/message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -10,7 +10,7 @@ class ApiService {
 
   factory ApiService() {
     final dio = Dio(BaseOptions(
-      baseUrl: Base.URL,
+      baseUrl: Base.URL_PROD,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {
@@ -21,6 +21,10 @@ class ApiService {
     //Todo: Thêm interceptor nếu muốn logging
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
     return ApiService._internal(dio);
+  }
+
+  void updateBaseUrl(String newBaseUrl) {
+    _dio.options.baseUrl = newBaseUrl;
   }
 
   Future<ApiResult<T>> get<T>(

@@ -23,7 +23,8 @@ class CustomButton extends StatelessWidget {
         style: ButtonStyle(
           minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 45)),
           backgroundColor: WidgetStatePropertyAll(
-              onTap != null ? AppColor.colorMain : AppColor.colorWelcome),
+            onTap != null ? AppColor.colorMain : AppColor.colorWelcome,
+          ),
         ),
         onPressed: onTap,
         child: AnimatedSize(

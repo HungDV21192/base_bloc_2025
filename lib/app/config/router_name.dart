@@ -1,7 +1,7 @@
 class RouterName {
-  static const String SplashScreen = '/';
-  static const String RegisterView = '/register';
-  static const String LoginView = '/login';
-  static const String HomeView = '/home';
-  static const String Settings = '/settings';
+  static const String splashScreen = '/';
+  static const String registerView = '/register';
+  static const String loginView = '/login';
+  static const String homeView = '/home';
+  static const String settings = '/settings';
 }

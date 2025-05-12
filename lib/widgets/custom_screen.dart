@@ -13,6 +13,7 @@ class CustomScreen extends StatelessWidget {
     this.canPop = true,
     this.onPopInvoked,
     this.isBack = true,
+    this.bottom,
   });
 
   final String titleAppBar;
@@ -24,6 +25,7 @@ class CustomScreen extends StatelessWidget {
   final bool canPop;
   final PopInvokedCallback? onPopInvoked;
   final bool isBack;
+  final PreferredSizeWidget? bottom;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class CustomScreen extends StatelessWidget {
             ),
             leading: leading,
             actions: actions,
+            bottom: bottom,
           ),
           body: body,
           bottomSheet: bottomSheet,

@@ -9,21 +9,21 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: RouterName.SplashScreen,
+    initialLocation: RouterName.splashScreen,
     navigatorKey: navigatorKey,
     routes: [
       GoRoute(
-          path: RouterName.SplashScreen,
+          path: RouterName.splashScreen,
           builder: (_, __) => const SplashScreen()),
       GoRoute(
-          path: RouterName.RegisterView,
+          path: RouterName.registerView,
           builder: (_, __) => const RegisterScreen()),
       GoRoute(
-          path: RouterName.LoginView, builder: (_, __) => const LoginScreen()),
+          path: RouterName.loginView, builder: (_, __) => const LoginScreen()),
       GoRoute(
-          path: RouterName.HomeView, builder: (_, __) => const HomeScreen()),
+          path: RouterName.homeView, builder: (_, __) => const HomeScreen()),
       GoRoute(
-          path: RouterName.Settings,
+          path: RouterName.settings,
           builder: (_, __) => const SettingsScreen()),
       //Todo: Ví dụ cho việc data số qua constructor của màn hình
       // Tại màn hình chuyển gọi context.go('/detail', extra: product); hoặc context.push('/detail', extra: product);
